@@ -14,7 +14,7 @@ export class Adaption implements SystemApi {
         const skills = actor.items.filter(i=>i.type === "skill" && i.name.toLowerCase() === skillId.toLowerCase())
         const test = await actor.setupSkill(skills[0]);
         await test.roll();
-        const roll = new Roll("1d100").roll({async:false});
+        const roll = await new Roll("1d100").roll({async:false});
         roll["_total"] = test.data.result.baseSL;
         return roll;
     }
