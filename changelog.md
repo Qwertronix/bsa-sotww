@@ -1,4 +1,4 @@
-# 1.1.0
-- Add Settings for additional Skills
 # 1.0.1
-- use skills correctly
+- fix for core module
+# 1.0.0
+- initial release
