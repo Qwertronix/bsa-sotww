@@ -72,8 +72,11 @@ export class Adaption implements SystemApi {
 
 
     get configCurrencies():CurrencyConfig[] {
-        return game['packs'].get('wfrp4e.basic')
-            .index.filter(f=>f.type==="money").map(currency=>{
+        let pack = game['packs'].get('wfrp4e.basic')
+        if (! pack){
+            pack = game['packs'].get('wfrp4e-core.items')
+        }
+        return pack.index.filter(f=>f.type==="money").map(currency=>{
                 let id = "bp";
                 let factor = 1;
                 if(currency.name === "Gold Crown"){
