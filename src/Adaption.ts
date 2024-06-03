@@ -50,13 +50,20 @@ export class Adaption implements SystemApi {
     }
 
     get configSkills():SkillConfig[] {
-        const skills = game['packs'].get('wfrp4e.basic')
-            .index.filter(f=>f.type==="skill").map(skill=>{
-            return {
-                id: skill.name,
-                label: skill.name
-            }
-        });
+        let pack = game['packs'].get('wfrp4e.basic')
+        if (! pack){
+            pack = game['packs'].get('wfrp4e-core.items')
+        }
+        let skills:SkillConfig[] = [];
+        if(pack){
+            skills = pack
+                .index.filter(f=>f.type==="skill").map(skill=>{
+                return {
+                    id: skill.name,
+                    label: skill.name
+                }
+            });
+        }
         Settings.get(Settings.SKILLS).split(",").forEach(skill=>{
             skills.push({id:skill.trim(),label:skill.trim()})
         });
